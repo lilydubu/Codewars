@@ -6,7 +6,7 @@
 #include <stdlib.h>
 
 // Helper for qsort to compare each int
-int compare(const int*a, const int*b){
+int compare(const void*a, const void*b){
   return *(int*)b - *(int*)a ;
 }
 
