@@ -1,5 +1,10 @@
 // You get a list of integers, and you have to write a function mirror that returns the "mirror" (or symmetric) version of this list: 
-// i.e. the middle element is the greatest, then the next greatest on both sides, then the next greatest, and so on...
+// i.e. THE MIDDLE ELEMENT IS THE BIGGEST, then the next greatest on both sides, then the next greatest, and so on...
+
+// First INSANE solution (idk what i was thinking): 
+// 1. Sort the copied array in reverse order
+// 2. Copy the sorted array to the results starting from the end (so from the smallest) 😭
+// 3. Starting from the nth index until the 2*n-2th index, copy from the sorted array (from the 2nd biggest)
 
 #include <stddef.h>
 #include <stdio.h>
