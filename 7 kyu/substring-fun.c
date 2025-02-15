@@ -5,7 +5,7 @@
 #include <string.h>
 
 char *nth_char(size_t length, const char *const strings[length],
-                char str_out[length + 1])
+    char str_out[length + 1])
 {
     for(size_t i = 0; i < length; i++){
       str_out[i] = strings[i][i];
