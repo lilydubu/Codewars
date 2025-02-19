@@ -9,7 +9,7 @@
 
 void reverse(char *start, char *end){
   char temp;
-  for(; start < end; start++, end--){
+  for(; start < end; start++, end--){  // Switches char from each side
     temp = *start;
     *start = *end;
     *end = temp;
@@ -17,36 +17,24 @@ void reverse(char *start, char *end){
 }
 
 void spin_words(const char *sentence, char *result) {
-  memcpy(result, sentence, strlen(sentence) * sizeof(char)); // Copy the sentence to result
-  result[strlen(sentence)] = '\0'; // Make sure to terminate the string
+  memcpy(result, sentence, strlen(sentence) * sizeof(char)); // Copy sentence to result
+  result[strlen(sentence)] = '\0'; // Terminate string
   
-  char *ptr = result; // Pointer used to traverse the string
-  char *start = result; // Pointer to keep track of beginning of word
-  int len = 0; // Used to keep track of the length of each word
-
-  // While the ptr is pointing to a character
+  char *ptr = result; // Will traverse the string (pointing to the start of the sentence initially)
+  *start = result; // Keep track of the beginning of the word
+  int len = 0; // Will count the length of each word
+  
   while(*ptr){
-    // Go through the string until we find a space (this marks the end of the word)
-    if(*ptr == ' '){
-      // Check the length, reverse if it's at least 5 characters
-      if(len >= 5){
-        reverse(start, (ptr - 1));
-      }
-      // Update the start of the next word
-      start = ptr + 1;
-      // Reset the length for the next word
+    if(*ptr == ' '){ // Reached end of word
+      if(len > 4) reverse(start, ptr-1); // Check if it should be reversed
+      // Reset variables for next word
       len = 0;
-    } else{
-      // If space not encountered, continue traversing the string
-      // And update the length of the current word
-      len++;
+      start = ptr + 1;
     }
-    // Move the pointer to the next character
-    ptr++;
+    else{ // Still traversing the word
+      len++; // Update the length of the word
+    }
+    ptr++; // Update the pointer to the next char
   }
-  // When we reach end of the word, check the length of the last word
-  if(len >= 5){
-    reverse(start, (ptr - 1));
-  }
-    
+  if(len > 4) reverse(start, ptr-1); // Handles the last word
 }
