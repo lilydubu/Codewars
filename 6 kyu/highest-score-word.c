@@ -7,40 +7,30 @@
 
 char  *highestScoringWord(const char *str)
 {
-  // Use const pointers to traverse the string and store places in the string w/o modifying
-  const char *ptr = str;
-  const char *best_word = ptr, *start = ptr;
-
-  // Variables to keep track of the best word and the current word
-  int best_score = 0, best_len = 0;
-  int score = 0, len = 0;
-
-  // While the character != '\0'
-  while(*ptr){
-    if(*ptr == ' '){ // If char is a space, we have reached the end of a word
-      if(score > best_score){ // Check if the current word has the highest score
-        best_score = score; 
-        best_len = len;
-        best_word = start;
-      }
-      start = ptr+1; // Move the start of the next word to the next char
-      score = 0; // Reset score for next word
-      len = 0; // Reset length for next word
+  const char *ptr = str; // Used to traverse the string
+  const char *best_word = ptr; // Used to remember the address of the best word
+  const char *start = ptr; // Used to remember the beginning of the current word
+  
+  int best_score = 0, best_len = 0; // Best word variables
+  int score = 0, len = 0; // Current word variables
+  
+  for(int i = 0; i <= (int)strlen(str); i++, ptr++){ // Loop until the  '\0'
+    // If the current char is not a letter, we have reached the end of the word
+    if(*ptr == ' ' || *ptr == '\0'){
+      // Check for highest score and update best_word
+      if(score > best_score){ best_score = score,  best_len = len, best_word = start;}
+      // Update variables for the next word
+      start = ptr+1, score = 0, len = 0;
     }
-    else{ // If it's not a space then it would be a letter
-      score += ((*ptr + 1) - 'a'); // Update the current word's score
-      len++; // Update the current word's length
+    else{
+      // Update variables for current word
+      score += *ptr - 'a' + 1, len++;
     }
-    ptr++; // Move on to the next char
-  }
-  if(score > best_score){ // Check the last word's score
-      best_score = score;
-      best_len = len;
-      best_word = start;
   }
   
-  char *result = (char*)malloc((best_len+1) * sizeof(char)); // Create a variable to store the best word since best_word is just a pointer
-  memcpy(result, best_word, (best_len) * sizeof(char)); // Copy best_word to the result
+  char *result = (char*)malloc((best_len+1) * sizeof(char)); // Dynamically allocate space for result string
+  if (!result) return NULL; // Check for allocation failure
+  memcpy(result, best_word, (best_len) * sizeof(char)); // Copy best_word
   result[best_len] = '\0'; // Terminate the string
   return result;
 }
