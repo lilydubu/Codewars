@@ -7,12 +7,8 @@
 
 char *longestConsec (const char *const strings[/*arr_len*/], int arr_len, int k)
 {
-  // For invalid input (not using strdup cos it gives me errors)
-  if(arr_len == 0 || k == 0 || k > arr_len){
-    char *none = malloc(1);
-    none[0] = '\0';
-    return none;
-  }
+  // For invalid input, return empty string
+  if(arr_len == 0 || k == 0 || k > arr_len) return calloc(1,1);
   
   int sum = 0;
   int lengths[arr_len];
