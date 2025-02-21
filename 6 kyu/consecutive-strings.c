@@ -7,7 +7,7 @@
 
 char *longestConsec (const char *const strings[/*arr_len*/], int arr_len, int k)
 {
-  // For invalid input
+  // For invalid input (not using strdup cos it gives me errors)
   if(arr_len == 0 || k == 0 || k > arr_len){
     char *none = malloc(1);
     none[0] = '\0';
@@ -32,7 +32,7 @@ char *longestConsec (const char *const strings[/*arr_len*/], int arr_len, int k)
   }
   
   // Create string of consecutive strings
-  char *result = (char*)calloc(most_sum+1, sizeof(char)); // Use calloc to initialize the string
+  char *result = (char*)calloc(most_sum + 1, sizeof(char)); // Use calloc to initialize the string
   for(int i = most_i; i < most_i + k; i++){
     strcat(result, strings[i]); // Concatenate the strings 
   }
