@@ -6,10 +6,11 @@
 
 unsigned trailing_zeroes(unsigned n) {
     int zeroes = 0;
-    do{
+    if(n == 0) zeroes = 1;
+    while(n != 0){
       if((n & 1) == 1) break;
       zeroes++;
-      n = n >> 1; 
-    }while(n != 0);
+      n = n >> 1;
+    }
     return zeroes;
 }
